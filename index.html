@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DVD Style Bouncing</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #facdcd;
+      }
+
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      // Ball properties
+      const ballRadius = 20;
+      let ballX = canvas.width / 2;
+      let ballY = canvas.height / 2;
+      let ballSpeedX = 5;
+      let ballSpeedY = 4;
+
+      // Animation loop
+      function animate() {
+        requestAnimationFrame(animate);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Update ball position
+        ballX += ballSpeedX;
+        ballY += ballSpeedY;
+
+        // Bounce off walls
+        if (ballX + ballRadius > canvas.width || ballX - ballRadius < 0) {
+          ballSpeedX *= -1;
+        }
+
+        if (ballY + ballRadius > canvas.height || ballY - ballRadius < 0) {
+          ballSpeedY *= -1;
+        }
+
+        // Draw the ball
+        ctx.beginPath();
+        ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
+        ctx.fillStyle = "#888";
+        ctx.fill();
+        ctx.closePath();
+      }
+
+      // Start the animation
+      animate();
+    </script>
+  </body>
+</html>
+
+<!-- <script>
+      const canvas = document.getElementById("myCanvas");
+      const c = canvas.getContext("2d");
+      console.log(canvas.height);
+
+      const ballRadius = 20;
+      let ballX = canvas.width / 2;
+      let ballY = canvas.height / 2;
+      let ballSpeedX = 5;
+      let ballSpeedY = 4;
+
+      function animate() {
+        requestAnimationFrame(animate);
+        c.clearRect(0, 0, canvas.width, canvas.height);
+
+        ballX = ballX + ballSpeedX;
+        ballY = ballY + ballSpeedY;
+
+        if (ballX + ballRadius > canvas.width || ballX - ballRadius < 0) {
+          ballSpeedX = ballSpeedX * -1;
+        }
+
+        if (ballY + ballRadius > canvas.height || ballY - ballRadius < 0) {
+          ballSpeedY = ballSpeedY * -1;
+
+          // Draw the ball
+          c.beginPath();
+          c.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
+          c.fillStyle = "red";
+          c.fill();
+          c.closePath();
+        }
+      }
+    </> -->
+
+<!-- <script>
+      const canvasWidth = window.innerWidth;
+      const canvasHeight = window.innerHeight;
+      console.log(canvasWidth, canvasHeight);
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const x = document.getElementById("myCanvas");
+      const s = x.getContext("2d");
+      s.moveTo(20, 55);
+      s.lineTo(580, 55);
+      s.stroke();
+
+      const t = x.getContext("2d");
+      t.font = "44px sans-serif";
+      t.strokeText("Made By Er.  Dipesh Paudel!", 20, 50);
+      //   You can use this to create plain text with stroke
+      //   t.fillText("Hello World", 200, 100);
+
+      console.log("hello");
+      const c = x.getContext("2d");
+      const radius = 20;
+      let xAxis = Math.floor(Math.random() * innerWidth);
+      let yAxis = Math.floor(Math.random()) * innerHeight;
+      let vx = Math.floor(Math.random() * 2);
+      let vy = Math.floor(Math.random() * 4);
+
+      dvdStyleBouncing();
+
+      function dvdStyleBouncing() {
+        // requestAnimationFrame(dvdStyleBouncing);
+
+        // Clearing pixels within rectangle
+        c.clearRectanglePixel(0, 0, innerWidth, innerHeight);
+
+        // Creating Circle
+        c.beginPath();
+        c.arc(xAxis, yAxis, radius, 0, Math.PI * 2, false);
+        c.fillStyle = "blue";
+        c.fill();
+        c.strokeStyle = "black";
+        c.stroke();
+
+        // Creating the condition so that ball bounces!
+        if (radius + xAxis > innerWidth) vx = 0 - vx;
+        if (y + yAxis < 0) vy = 0 - vy;
+        if (y - radius < 0) vy = 0 - vy;
+
+        xAxis = xAxis + vx;
+        yAxis = yAxis + vy;
+      }
+    </script> -->
